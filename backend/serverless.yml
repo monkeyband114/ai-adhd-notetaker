@@ -7,7 +7,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs18.x
-  region: us-east-1
+  region: eu-north-1
   environment:
     MONGO_URI: ${mongodb+srv://dangerdinstack:TI2hSilpVgS1X2fB@cluster0.soefctu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0}
 

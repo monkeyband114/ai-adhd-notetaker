@@ -1,8 +1,9 @@
-import { connectToDatabase } from "../lib/db.js";
-import { Note } from "../lib/Note.js";
+const { connectToDatabase } = require("../lib/db"); // Adjust path as needed
+const { Note } = require("../lib/Note"); // Adjust path as needed
 
-export const handler = async (event) => {
+const handler = async (event) => {
   await connectToDatabase();
+
   const { id } = event.pathParameters;
   const data = JSON.parse(event.body);
 
@@ -18,8 +19,8 @@ export const handler = async (event) => {
         pinned: data.pinned,
         archived: data.archived,
       },
-      $addToSet: { sharedWith: { $each: data.sharedWith || [] } }, // Handle adding new collaborators
-      $pull: { sharedWith: { email: { $in: data.removeSharedWith || [] } } }, // Handle removing collaborators
+      $addToSet: { sharedWith: { $each: data.sharedWith || [] } }, // Add collaborators
+      $pull: { sharedWith: { email: { $in: data.removeSharedWith || [] } } }, // Remove collaborators
     },
     { new: true },
   );
@@ -29,3 +30,5 @@ export const handler = async (event) => {
     body: JSON.stringify(updated),
   };
 };
+
+module.exports = { handler };

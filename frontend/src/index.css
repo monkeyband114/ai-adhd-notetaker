@@ -1,0 +1,143 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/opendyslexic');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Original shadcn variables */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 254 82% 75%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 57%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 254 82% 75%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar variables */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 220 14% 57%;
+    --sidebar-primary: 254 82% 75%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 254 82% 75%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  /* Accessibility focus indicators */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-lavender;
+  }
+
+  /* Base styles for headings to create better spacing */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight mb-4;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+
+  p {
+    @apply leading-7 mb-4;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-lavender text-white hover:bg-lavender-dark rounded-md px-4 py-2 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-bluegray text-white hover:bg-bluegray-dark rounded-md px-4 py-2 transition-colors;
+  }
+
+  .btn-outline {
+    @apply border border-lavender text-lavender hover:bg-lavender/10 rounded-md px-4 py-2 transition-colors;
+  }
+
+  .card-hoverable {
+    @apply bg-white rounded-lg border border-border p-4 shadow-sm transition-all hover:shadow-md;
+  }
+
+  .focus-flow-input {
+    @apply w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm 
+           ring-offset-background file:border-0 file:bg-transparent 
+           file:text-sm file:font-medium placeholder:text-muted-foreground 
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
+           focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .tag-pill {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium 
+           bg-softblue text-black/80;
+  }
+
+  /* Dyslexia-friendly text styles */
+  .dyslexic-text {
+    @apply font-dyslexic leading-relaxed tracking-wide;
+  }
+
+  .atkinson-text {
+    @apply font-atkinson leading-relaxed;
+  }
+
+  /* Increased line heights for better readability */
+  .spaced-text {
+    @apply leading-loose tracking-wide;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}

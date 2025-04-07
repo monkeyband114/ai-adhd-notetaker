@@ -1,8 +1,10 @@
-import { connectToDatabase } from "../lib/db.js";
-import { Note } from "../lib/Note.js";
+const { connectToDatabase } = require("../lib/db"); // Adjust the path if necessary
+const { Note } = require("../lib/Note"); // Adjust the path if necessary
 
-export const handler = async (event) => {
+const handler = async (event) => {
+  // Establish database connection
   await connectToDatabase();
+
   const data = JSON.parse(event.body);
 
   // Default values for the new fields
@@ -18,3 +20,5 @@ export const handler = async (event) => {
     body: JSON.stringify(newNote),
   };
 };
+
+module.exports = { handler };

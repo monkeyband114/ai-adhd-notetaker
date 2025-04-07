@@ -1,11 +1,10 @@
-import { connectToDatabase } from "../lib/db.js";
-import { Note } from "../lib/Note.js";
+const { connectToDatabase } = require("../lib/db"); // Adjust path as necessary
+const { Note } = require("../lib/Note"); // Adjust path as necessary
 
-export const handler = async (event) => {
+const handler = async (event) => {
+  // Establish database connection
   await connectToDatabase();
   const { id } = event.pathParameters;
-
-  // Soft delete by archiving the note
   const note = await Note.findByIdAndUpdate(
     id,
     { archived: true },
@@ -14,6 +13,8 @@ export const handler = async (event) => {
 
   return {
     statusCode: 204,
-    body: "",
+    body: "", // Empty body as per HTTP 204 No Content
   };
 };
+
+module.exports = { handler };

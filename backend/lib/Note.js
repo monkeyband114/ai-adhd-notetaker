@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const NoteSchema = new mongoose.Schema({
   title: { type: String, required: true },
@@ -22,4 +22,7 @@ const NoteSchema = new mongoose.Schema({
   archived: { type: Boolean, default: false },
 });
 
-export const Note = mongoose.models.Note || mongoose.model("Note", NoteSchema);
+// Prevent OverwriteModelError in Lambda or hot-reload environments
+const Note = mongoose.models.Note || mongoose.model("Note", NoteSchema);
+
+module.exports = { Note };
