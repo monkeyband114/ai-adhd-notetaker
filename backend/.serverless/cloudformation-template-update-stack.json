@@ -101,6 +101,24 @@
         "LogGroupName": "/aws/lambda/adhd-notes-api-dev-summarizeNote"
       }
     },
+    "SharedNotesLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/adhd-notes-api-dev-sharedNotes"
+      }
+    },
+    "PinnedNotesLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/adhd-notes-api-dev-pinnedNotes"
+      }
+    },
+    "ArchivedNotesLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/adhd-notes-api-dev-archivedNotes"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -186,7 +204,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/adhd-notes-api/dev/1744042700165-2025-04-07T16:18:20.165Z/adhd-notes-api.zip"
+          "S3Key": "serverless/adhd-notes-api/dev/1744045020189-2025-04-07T16:57:00.189Z/adhd-notes-api.zip"
         },
         "Handler": "functions/createNote.handler",
         "Runtime": "nodejs18.x",
@@ -216,7 +234,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/adhd-notes-api/dev/1744042700165-2025-04-07T16:18:20.165Z/adhd-notes-api.zip"
+          "S3Key": "serverless/adhd-notes-api/dev/1744045020189-2025-04-07T16:57:00.189Z/adhd-notes-api.zip"
         },
         "Handler": "functions/getNotes.handler",
         "Runtime": "nodejs18.x",
@@ -246,7 +264,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/adhd-notes-api/dev/1744042700165-2025-04-07T16:18:20.165Z/adhd-notes-api.zip"
+          "S3Key": "serverless/adhd-notes-api/dev/1744045020189-2025-04-07T16:57:00.189Z/adhd-notes-api.zip"
         },
         "Handler": "functions/updateNote.handler",
         "Runtime": "nodejs18.x",
@@ -276,7 +294,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/adhd-notes-api/dev/1744042700165-2025-04-07T16:18:20.165Z/adhd-notes-api.zip"
+          "S3Key": "serverless/adhd-notes-api/dev/1744045020189-2025-04-07T16:57:00.189Z/adhd-notes-api.zip"
         },
         "Handler": "functions/deleteNote.handler",
         "Runtime": "nodejs18.x",
@@ -306,7 +324,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/adhd-notes-api/dev/1744042700165-2025-04-07T16:18:20.165Z/adhd-notes-api.zip"
+          "S3Key": "serverless/adhd-notes-api/dev/1744045020189-2025-04-07T16:57:00.189Z/adhd-notes-api.zip"
         },
         "Handler": "functions/summarizeNote.handler",
         "Runtime": "nodejs18.x",
@@ -329,54 +347,174 @@
         "SummarizeNoteLogGroup"
       ]
     },
-    "CreateNoteLambdaVersionXArAmP51sDfpUpxk1HG1sivVqdwJ39JbxePcmLA0pw": {
+    "SharedNotesLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/adhd-notes-api/dev/1744045020189-2025-04-07T16:57:00.189Z/adhd-notes-api.zip"
+        },
+        "Handler": "functions/getNotes.handler",
+        "Runtime": "nodejs18.x",
+        "FunctionName": "adhd-notes-api-dev-sharedNotes",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "MONGO_URI": "mongodb+srv://dangerdinstack:TI2hSilpVgS1X2fB@cluster0.soefctu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "SharedNotesLogGroup"
+      ]
+    },
+    "PinnedNotesLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/adhd-notes-api/dev/1744045020189-2025-04-07T16:57:00.189Z/adhd-notes-api.zip"
+        },
+        "Handler": "functions/getNotes.handler",
+        "Runtime": "nodejs18.x",
+        "FunctionName": "adhd-notes-api-dev-pinnedNotes",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "MONGO_URI": "mongodb+srv://dangerdinstack:TI2hSilpVgS1X2fB@cluster0.soefctu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "PinnedNotesLogGroup"
+      ]
+    },
+    "ArchivedNotesLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/adhd-notes-api/dev/1744045020189-2025-04-07T16:57:00.189Z/adhd-notes-api.zip"
+        },
+        "Handler": "functions/getNotes.handler",
+        "Runtime": "nodejs18.x",
+        "FunctionName": "adhd-notes-api-dev-archivedNotes",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "MONGO_URI": "mongodb+srv://dangerdinstack:TI2hSilpVgS1X2fB@cluster0.soefctu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "ArchivedNotesLogGroup"
+      ]
+    },
+    "CreateNoteLambdaVersionKBIkLLa51f6zNyjJNZmdQQQCtD8gKO6z7DPBc6yY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateNoteLambdaFunction"
         },
-        "CodeSha256": "vYvLtrJgScmsietzW5TEf1QeuRlHWRjxfoiYTFn/GR4="
+        "CodeSha256": "Qu7kzMAZ4usjgyD632Hf1eM0LWckd2ITFrEWJ76zEEg="
       }
     },
-    "GetNotesLambdaVersionwHNdZ8UVSuYJ2NH2jH8EjRETxipLsXEo0sMgxmtU": {
+    "GetNotesLambdaVersion7qTrAKAnjBNLiaxm5XgHrp6vPylBTcYHfRx45sS04g": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetNotesLambdaFunction"
         },
-        "CodeSha256": "vYvLtrJgScmsietzW5TEf1QeuRlHWRjxfoiYTFn/GR4="
+        "CodeSha256": "Qu7kzMAZ4usjgyD632Hf1eM0LWckd2ITFrEWJ76zEEg="
       }
     },
-    "UpdateNoteLambdaVersionvnxODdc7tpdooTuvxt3VNnIyS8orY7ClWcsUCmHowQ": {
+    "UpdateNoteLambdaVersionR7PlHmFOTZiTR8BfKnK5DumyUhHqpKMthTcxqeqZM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateNoteLambdaFunction"
         },
-        "CodeSha256": "vYvLtrJgScmsietzW5TEf1QeuRlHWRjxfoiYTFn/GR4="
+        "CodeSha256": "Qu7kzMAZ4usjgyD632Hf1eM0LWckd2ITFrEWJ76zEEg="
       }
     },
-    "DeleteNoteLambdaVersionHeooacp3oHIh2VdMuKFO4CxEmFiTZhGYhP6848CRR3g": {
+    "DeleteNoteLambdaVersionStxXHD9KTBb4rmiY6pdjy2OKTPzlCJTPAWN2qS1A9gk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteNoteLambdaFunction"
         },
-        "CodeSha256": "vYvLtrJgScmsietzW5TEf1QeuRlHWRjxfoiYTFn/GR4="
+        "CodeSha256": "Qu7kzMAZ4usjgyD632Hf1eM0LWckd2ITFrEWJ76zEEg="
       }
     },
-    "SummarizeNoteLambdaVersionKZtTXdHS9gZIylo1b5pI2ofPBfH5zEqHgySOkdpqOM8": {
+    "SummarizeNoteLambdaVersionNnebqJ7b2SQVeCDFtPE3TWBLUIPXw8GOEJTQyVmZyA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SummarizeNoteLambdaFunction"
         },
-        "CodeSha256": "vYvLtrJgScmsietzW5TEf1QeuRlHWRjxfoiYTFn/GR4="
+        "CodeSha256": "Qu7kzMAZ4usjgyD632Hf1eM0LWckd2ITFrEWJ76zEEg="
+      }
+    },
+    "SharedNotesLambdaVersiont9KkbtI9zKHVp7oxMLRiQqyPPKuhfTe5NzgkH0TXI": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "SharedNotesLambdaFunction"
+        },
+        "CodeSha256": "Qu7kzMAZ4usjgyD632Hf1eM0LWckd2ITFrEWJ76zEEg="
+      }
+    },
+    "PinnedNotesLambdaVersionrE2ojjaz269KmNNm2ZiSkAUU4QXoLmCCq8bZOGEo": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "PinnedNotesLambdaFunction"
+        },
+        "CodeSha256": "Qu7kzMAZ4usjgyD632Hf1eM0LWckd2ITFrEWJ76zEEg="
+      }
+    },
+    "ArchivedNotesLambdaVersionPpDHkCnap2rYiEJWxnHMny10nMIGZqXeiA99b5hzU": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "ArchivedNotesLambdaFunction"
+        },
+        "CodeSha256": "Qu7kzMAZ4usjgyD632Hf1eM0LWckd2ITFrEWJ76zEEg="
       }
     },
     "ApiGatewayRestApi": {
@@ -413,6 +551,42 @@
           "Ref": "ApiGatewayResourceNotes"
         },
         "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceNotesShared": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceNotes"
+        },
+        "PathPart": "shared",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceNotesPinned": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceNotes"
+        },
+        "PathPart": "pinned",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceNotesArchived": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceNotes"
+        },
+        "PathPart": "archived",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -562,6 +736,141 @@
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceSummarize"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodNotesSharedOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceNotesShared"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodNotesPinnedOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceNotesPinned"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodNotesArchivedOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceNotesArchived"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -798,7 +1107,145 @@
         "SummarizeNoteLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1744042687951": {
+    "ApiGatewayMethodNotesSharedGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceNotesShared"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "SharedNotesLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "SharedNotesLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodNotesPinnedGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceNotesPinned"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "PinnedNotesLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "PinnedNotesLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodNotesArchivedGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceNotesArchived"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "ArchivedNotesLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "ArchivedNotesLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayDeployment1744045007951": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -810,11 +1257,17 @@
         "ApiGatewayMethodNotesOptions",
         "ApiGatewayMethodNotesIdVarOptions",
         "ApiGatewayMethodSummarizeOptions",
+        "ApiGatewayMethodNotesSharedOptions",
+        "ApiGatewayMethodNotesPinnedOptions",
+        "ApiGatewayMethodNotesArchivedOptions",
         "ApiGatewayMethodNotesPost",
         "ApiGatewayMethodNotesGet",
         "ApiGatewayMethodNotesIdVarPut",
         "ApiGatewayMethodNotesIdVarDelete",
-        "ApiGatewayMethodSummarizePost"
+        "ApiGatewayMethodSummarizePost",
+        "ApiGatewayMethodNotesSharedGet",
+        "ApiGatewayMethodNotesPinnedGet",
+        "ApiGatewayMethodNotesArchivedGet"
       ]
     },
     "CreateNoteLambdaPermissionApiGateway": {
@@ -1001,6 +1454,117 @@
           ]
         }
       }
+    },
+    "SharedNotesLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "SharedNotesLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "PinnedNotesLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "PinnedNotesLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "ArchivedNotesLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "ArchivedNotesLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
     }
   },
   "Outputs": {
@@ -1015,7 +1579,7 @@
     "CreateNoteLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateNoteLambdaVersionXArAmP51sDfpUpxk1HG1sivVqdwJ39JbxePcmLA0pw"
+        "Ref": "CreateNoteLambdaVersionKBIkLLa51f6zNyjJNZmdQQQCtD8gKO6z7DPBc6yY"
       },
       "Export": {
         "Name": "sls-adhd-notes-api-dev-CreateNoteLambdaFunctionQualifiedArn"
@@ -1024,7 +1588,7 @@
     "GetNotesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetNotesLambdaVersionwHNdZ8UVSuYJ2NH2jH8EjRETxipLsXEo0sMgxmtU"
+        "Ref": "GetNotesLambdaVersion7qTrAKAnjBNLiaxm5XgHrp6vPylBTcYHfRx45sS04g"
       },
       "Export": {
         "Name": "sls-adhd-notes-api-dev-GetNotesLambdaFunctionQualifiedArn"
@@ -1033,7 +1597,7 @@
     "UpdateNoteLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateNoteLambdaVersionvnxODdc7tpdooTuvxt3VNnIyS8orY7ClWcsUCmHowQ"
+        "Ref": "UpdateNoteLambdaVersionR7PlHmFOTZiTR8BfKnK5DumyUhHqpKMthTcxqeqZM"
       },
       "Export": {
         "Name": "sls-adhd-notes-api-dev-UpdateNoteLambdaFunctionQualifiedArn"
@@ -1042,7 +1606,7 @@
     "DeleteNoteLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteNoteLambdaVersionHeooacp3oHIh2VdMuKFO4CxEmFiTZhGYhP6848CRR3g"
+        "Ref": "DeleteNoteLambdaVersionStxXHD9KTBb4rmiY6pdjy2OKTPzlCJTPAWN2qS1A9gk"
       },
       "Export": {
         "Name": "sls-adhd-notes-api-dev-DeleteNoteLambdaFunctionQualifiedArn"
@@ -1051,10 +1615,37 @@
     "SummarizeNoteLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SummarizeNoteLambdaVersionKZtTXdHS9gZIylo1b5pI2ofPBfH5zEqHgySOkdpqOM8"
+        "Ref": "SummarizeNoteLambdaVersionNnebqJ7b2SQVeCDFtPE3TWBLUIPXw8GOEJTQyVmZyA"
       },
       "Export": {
         "Name": "sls-adhd-notes-api-dev-SummarizeNoteLambdaFunctionQualifiedArn"
+      }
+    },
+    "SharedNotesLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "SharedNotesLambdaVersiont9KkbtI9zKHVp7oxMLRiQqyPPKuhfTe5NzgkH0TXI"
+      },
+      "Export": {
+        "Name": "sls-adhd-notes-api-dev-SharedNotesLambdaFunctionQualifiedArn"
+      }
+    },
+    "PinnedNotesLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "PinnedNotesLambdaVersionrE2ojjaz269KmNNm2ZiSkAUU4QXoLmCCq8bZOGEo"
+      },
+      "Export": {
+        "Name": "sls-adhd-notes-api-dev-PinnedNotesLambdaFunctionQualifiedArn"
+      }
+    },
+    "ArchivedNotesLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "ArchivedNotesLambdaVersionPpDHkCnap2rYiEJWxnHMny10nMIGZqXeiA99b5hzU"
+      },
+      "Export": {
+        "Name": "sls-adhd-notes-api-dev-ArchivedNotesLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {

@@ -51,3 +51,27 @@ functions:
           path: summarize
           method: post
           cors: true
+
+  sharedNotes:
+    handler: functions/getNotes.handler
+    events:
+      - http:
+          path: notes/shared
+          method: get
+          cors: true
+
+  pinnedNotes:
+    handler: functions/getNotes.handler
+    events:
+      - http:
+          path: notes/pinned
+          method: get
+          cors: true
+
+  archivedNotes:
+    handler: functions/getNotes.handler
+    events:
+      - http:
+          path: notes/archived
+          method: get
+          cors: true
