@@ -1,0 +1,49 @@
+service: adhd-notes-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    MONGO_URI: ${env:MONGO_URI}
+
+functions:
+  createNote:
+    handler: functions/createNote.handler
+    events:
+      - http:
+          path: notes
+          method: post
+          cors: true
+
+  getNotes:
+    handler: functions/getNotes.handler
+    events:
+      - http:
+          path: notes
+          method: get
+          cors: true
+
+  updateNote:
+    handler: functions/updateNote.handler
+    events:
+      - http:
+          path: notes/{id}
+          method: put
+          cors: true
+
+  deleteNote:
+    handler: functions/deleteNote.handler
+    events:
+      - http:
+          path: notes/{id}
+          method: delete
+          cors: true
+
+  summarizeNote:
+    handler: functions/summarizeNote.handler
+    events:
+      - http:
+          path: summarize
+          method: post
+          cors: true
