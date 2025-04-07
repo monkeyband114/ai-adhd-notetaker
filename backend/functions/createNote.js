@@ -4,7 +4,14 @@ import { Note } from "../lib/Note.js";
 export const handler = async (event) => {
   await connectToDatabase();
   const data = JSON.parse(event.body);
-  const newNote = await Note.create(data);
+
+  // Default values for the new fields
+  const newNote = await Note.create({
+    ...data,
+    pinned: data.pinned || false,
+    archived: data.archived || false,
+    sharedWith: data.sharedWith || [],
+  });
 
   return {
     statusCode: 201,
