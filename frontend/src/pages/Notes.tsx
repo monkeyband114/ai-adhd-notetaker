@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { toast } from 'sonner';
 import { Note } from '../services/notesService';
 import { useNotes as useNotesContext } from '../contexts/NotesContext';
@@ -32,12 +33,21 @@ const Notes: React.FC = () => {
     const loadData = async () => {
       setIsLoading(true);
       try {
-        await Promise.all([
+        // Fetch all data but ignore individual errors to prevent infinite loading
+        const results = await Promise.allSettled([
           fetchNotes(),
           fetchPinnedNotes(),
           fetchArchivedNotes(),
           fetchSharedNotes()
         ]);
+        
+        // Log any failed requests
+        results.forEach((result, index) => {
+          if (result.status === 'rejected') {
+            const endpoints = ['notes', 'pinned', 'archived', 'shared'];
+            console.error(`Failed to fetch ${endpoints[index]}:`, result.reason);
+          }
+        });
       } catch (error) {
         console.error('Error loading notes data', error);
         toast.error('Failed to load notes');
@@ -93,6 +103,11 @@ const Notes: React.FC = () => {
 
       <Dialog open={isEditorOpen} onOpenChange={setIsEditorOpen}>
         <DialogContent className="max-w-3xl h-[90vh] p-0">
+          <VisuallyHidden>
+            <DialogTitle>
+              {selectedNote ? 'Edit Note' : 'Create Note'}
+            </DialogTitle>
+          </VisuallyHidden>
           <NoteEditor 
             note={selectedNote}
             onClose={() => setIsEditorOpen(false)}

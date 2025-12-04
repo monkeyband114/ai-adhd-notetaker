@@ -56,7 +56,7 @@ const NoteEditor: React.FC<NoteEditorProps> = ({ note, onClose, afterSave }) => 
           tags
         };
         
-        const updatedNote = await updateNote(note.id, updateData);
+        const updatedNote = await updateNote(note.noteId || note.id, updateData);
         toast.success('Note updated successfully');
         
         if (afterSave) {

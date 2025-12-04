@@ -219,7 +219,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/adhd-notes-api/dev/1744049413667-2025-04-07T18:10:13.667Z/adhd-notes-api.zip"
+                "S3Key": "serverless/adhd-notes-api/dev/1744066093838-2025-04-07T22:48:13.838Z/adhd-notes-api.zip"
               },
               "Handler": "functions/createNote.handler",
               "Runtime": "nodejs18.x",
@@ -249,7 +249,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/adhd-notes-api/dev/1744049413667-2025-04-07T18:10:13.667Z/adhd-notes-api.zip"
+                "S3Key": "serverless/adhd-notes-api/dev/1744066093838-2025-04-07T22:48:13.838Z/adhd-notes-api.zip"
               },
               "Handler": "functions/getNotes.handler",
               "Runtime": "nodejs18.x",
@@ -279,7 +279,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/adhd-notes-api/dev/1744049413667-2025-04-07T18:10:13.667Z/adhd-notes-api.zip"
+                "S3Key": "serverless/adhd-notes-api/dev/1744066093838-2025-04-07T22:48:13.838Z/adhd-notes-api.zip"
               },
               "Handler": "functions/updateNote.handler",
               "Runtime": "nodejs18.x",
@@ -309,7 +309,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/adhd-notes-api/dev/1744049413667-2025-04-07T18:10:13.667Z/adhd-notes-api.zip"
+                "S3Key": "serverless/adhd-notes-api/dev/1744066093838-2025-04-07T22:48:13.838Z/adhd-notes-api.zip"
               },
               "Handler": "functions/deleteNote.handler",
               "Runtime": "nodejs18.x",
@@ -339,7 +339,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/adhd-notes-api/dev/1744049413667-2025-04-07T18:10:13.667Z/adhd-notes-api.zip"
+                "S3Key": "serverless/adhd-notes-api/dev/1744066093838-2025-04-07T22:48:13.838Z/adhd-notes-api.zip"
               },
               "Handler": "functions/summarizeNote.handler",
               "Runtime": "nodejs18.x",
@@ -369,7 +369,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/adhd-notes-api/dev/1744049413667-2025-04-07T18:10:13.667Z/adhd-notes-api.zip"
+                "S3Key": "serverless/adhd-notes-api/dev/1744066093838-2025-04-07T22:48:13.838Z/adhd-notes-api.zip"
               },
               "Handler": "functions/getNotes.handler",
               "Runtime": "nodejs18.x",
@@ -399,7 +399,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/adhd-notes-api/dev/1744049413667-2025-04-07T18:10:13.667Z/adhd-notes-api.zip"
+                "S3Key": "serverless/adhd-notes-api/dev/1744066093838-2025-04-07T22:48:13.838Z/adhd-notes-api.zip"
               },
               "Handler": "functions/getNotes.handler",
               "Runtime": "nodejs18.x",
@@ -429,7 +429,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/adhd-notes-api/dev/1744049413667-2025-04-07T18:10:13.667Z/adhd-notes-api.zip"
+                "S3Key": "serverless/adhd-notes-api/dev/1744066093838-2025-04-07T22:48:13.838Z/adhd-notes-api.zip"
               },
               "Handler": "functions/getNotes.handler",
               "Runtime": "nodejs18.x",
@@ -452,84 +452,84 @@
               "ArchivedNotesLogGroup"
             ]
           },
-          "CreateNoteLambdaVersionB5J4HDWNVQzZdZ46iVazHOYLMaGOw6DTaowMUQZfREc": {
+          "CreateNoteLambdaVersion8nrIvumSuVWvdvxct9YT6ULXry3zVOmKTngvg0ihA8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateNoteLambdaFunction"
               },
-              "CodeSha256": "Qu4jciG069CztvRtQ/Sy4/jj2aiE9uRJkRTnrD43HQ0="
+              "CodeSha256": "F07o8JKwhaFG/hYvrZDhxUwpXOXgL6UDHyWrSj2QWBg="
             }
           },
-          "GetNotesLambdaVersionKi48H1UAOfg7vhVUB1WWBq8lFxsult4d0A7KEkCokIs": {
+          "GetNotesLambdaVersion1SDtXlRcUQrgMvl7q5tu0AV3985os2b5s3pFVx8dOF0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetNotesLambdaFunction"
               },
-              "CodeSha256": "Qu4jciG069CztvRtQ/Sy4/jj2aiE9uRJkRTnrD43HQ0="
+              "CodeSha256": "F07o8JKwhaFG/hYvrZDhxUwpXOXgL6UDHyWrSj2QWBg="
             }
           },
-          "UpdateNoteLambdaVersion59lNJohbF7n2eE1Wc9zH8dQ0PwQySlWqb13ilX65ds": {
+          "UpdateNoteLambdaVersiongRM3mKkMFuaZ6xaT4wN1tDpggxgJaOUO6kl3IHHUVk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateNoteLambdaFunction"
               },
-              "CodeSha256": "Qu4jciG069CztvRtQ/Sy4/jj2aiE9uRJkRTnrD43HQ0="
+              "CodeSha256": "F07o8JKwhaFG/hYvrZDhxUwpXOXgL6UDHyWrSj2QWBg="
             }
           },
-          "DeleteNoteLambdaVersiongDKMXUN1doVnA7ZJra28afYx5YiGyEOVnV4sjCrkkw": {
+          "DeleteNoteLambdaVersionOGlG1AqOqZW6Ifxy5Ux5dkTX7a9jVi8zxr3F1KhpQs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteNoteLambdaFunction"
               },
-              "CodeSha256": "Qu4jciG069CztvRtQ/Sy4/jj2aiE9uRJkRTnrD43HQ0="
+              "CodeSha256": "F07o8JKwhaFG/hYvrZDhxUwpXOXgL6UDHyWrSj2QWBg="
             }
           },
-          "SummarizeNoteLambdaVersionIV2iymjrF1E0abiDuDCBfc90dlYJwf0DLSglXaIUYQ": {
+          "SummarizeNoteLambdaVersionV8s1xM5dPSXd4wlPC0aBprjBnrFtX7zxfCogOoLddo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SummarizeNoteLambdaFunction"
               },
-              "CodeSha256": "Qu4jciG069CztvRtQ/Sy4/jj2aiE9uRJkRTnrD43HQ0="
+              "CodeSha256": "F07o8JKwhaFG/hYvrZDhxUwpXOXgL6UDHyWrSj2QWBg="
             }
           },
-          "SharedNotesLambdaVersionuWuTGAaHy0TGpw6z3lXkHCvvklGVL9hFAGBa7F6i5Lw": {
+          "SharedNotesLambdaVersionB9P7Rf23qo1DbENmz9z8eIqHrhV1NBlmajvlXKw6Es": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SharedNotesLambdaFunction"
               },
-              "CodeSha256": "Qu4jciG069CztvRtQ/Sy4/jj2aiE9uRJkRTnrD43HQ0="
+              "CodeSha256": "F07o8JKwhaFG/hYvrZDhxUwpXOXgL6UDHyWrSj2QWBg="
             }
           },
-          "PinnedNotesLambdaVersiongX0rh8C2QpbX1MsaYE6eyp0N22wLiz7rzjuiXQRYFfg": {
+          "PinnedNotesLambdaVersionFjBSEgQXslyoxGfmzYSF0EZVmOUbZBdTNWzYiBNsEY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PinnedNotesLambdaFunction"
               },
-              "CodeSha256": "Qu4jciG069CztvRtQ/Sy4/jj2aiE9uRJkRTnrD43HQ0="
+              "CodeSha256": "F07o8JKwhaFG/hYvrZDhxUwpXOXgL6UDHyWrSj2QWBg="
             }
           },
-          "ArchivedNotesLambdaVersionhKrAOU1QQymheTDVCmirBWmwz13qtxgMM3f71GxBkU": {
+          "ArchivedNotesLambdaVersionfGqMURg0new6dBJUjnIWFcdM8JTtCKQCXjLzlmRTnYc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ArchivedNotesLambdaFunction"
               },
-              "CodeSha256": "Qu4jciG069CztvRtQ/Sy4/jj2aiE9uRJkRTnrD43HQ0="
+              "CodeSha256": "F07o8JKwhaFG/hYvrZDhxUwpXOXgL6UDHyWrSj2QWBg="
             }
           },
           "ApiGatewayRestApi": {
@@ -1260,7 +1260,7 @@
               "ArchivedNotesLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1744049393415": {
+          "ApiGatewayDeployment1744066076269": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1594,7 +1594,7 @@
           "CreateNoteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateNoteLambdaVersionB5J4HDWNVQzZdZ46iVazHOYLMaGOw6DTaowMUQZfREc"
+              "Ref": "CreateNoteLambdaVersion8nrIvumSuVWvdvxct9YT6ULXry3zVOmKTngvg0ihA8"
             },
             "Export": {
               "Name": "sls-adhd-notes-api-dev-CreateNoteLambdaFunctionQualifiedArn"
@@ -1603,7 +1603,7 @@
           "GetNotesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetNotesLambdaVersionKi48H1UAOfg7vhVUB1WWBq8lFxsult4d0A7KEkCokIs"
+              "Ref": "GetNotesLambdaVersion1SDtXlRcUQrgMvl7q5tu0AV3985os2b5s3pFVx8dOF0"
             },
             "Export": {
               "Name": "sls-adhd-notes-api-dev-GetNotesLambdaFunctionQualifiedArn"
@@ -1612,7 +1612,7 @@
           "UpdateNoteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateNoteLambdaVersion59lNJohbF7n2eE1Wc9zH8dQ0PwQySlWqb13ilX65ds"
+              "Ref": "UpdateNoteLambdaVersiongRM3mKkMFuaZ6xaT4wN1tDpggxgJaOUO6kl3IHHUVk"
             },
             "Export": {
               "Name": "sls-adhd-notes-api-dev-UpdateNoteLambdaFunctionQualifiedArn"
@@ -1621,7 +1621,7 @@
           "DeleteNoteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteNoteLambdaVersiongDKMXUN1doVnA7ZJra28afYx5YiGyEOVnV4sjCrkkw"
+              "Ref": "DeleteNoteLambdaVersionOGlG1AqOqZW6Ifxy5Ux5dkTX7a9jVi8zxr3F1KhpQs"
             },
             "Export": {
               "Name": "sls-adhd-notes-api-dev-DeleteNoteLambdaFunctionQualifiedArn"
@@ -1630,7 +1630,7 @@
           "SummarizeNoteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SummarizeNoteLambdaVersionIV2iymjrF1E0abiDuDCBfc90dlYJwf0DLSglXaIUYQ"
+              "Ref": "SummarizeNoteLambdaVersionV8s1xM5dPSXd4wlPC0aBprjBnrFtX7zxfCogOoLddo"
             },
             "Export": {
               "Name": "sls-adhd-notes-api-dev-SummarizeNoteLambdaFunctionQualifiedArn"
@@ -1639,7 +1639,7 @@
           "SharedNotesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SharedNotesLambdaVersionuWuTGAaHy0TGpw6z3lXkHCvvklGVL9hFAGBa7F6i5Lw"
+              "Ref": "SharedNotesLambdaVersionB9P7Rf23qo1DbENmz9z8eIqHrhV1NBlmajvlXKw6Es"
             },
             "Export": {
               "Name": "sls-adhd-notes-api-dev-SharedNotesLambdaFunctionQualifiedArn"
@@ -1648,7 +1648,7 @@
           "PinnedNotesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PinnedNotesLambdaVersiongX0rh8C2QpbX1MsaYE6eyp0N22wLiz7rzjuiXQRYFfg"
+              "Ref": "PinnedNotesLambdaVersionFjBSEgQXslyoxGfmzYSF0EZVmOUbZBdTNWzYiBNsEY"
             },
             "Export": {
               "Name": "sls-adhd-notes-api-dev-PinnedNotesLambdaFunctionQualifiedArn"
@@ -1657,7 +1657,7 @@
           "ArchivedNotesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ArchivedNotesLambdaVersionhKrAOU1QQymheTDVCmirBWmwz13qtxgMM3f71GxBkU"
+              "Ref": "ArchivedNotesLambdaVersionfGqMURg0new6dBJUjnIWFcdM8JTtCKQCXjLzlmRTnYc"
             },
             "Export": {
               "Name": "sls-adhd-notes-api-dev-ArchivedNotesLambdaFunctionQualifiedArn"
@@ -1815,7 +1815,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "CreateNoteLambdaVersionB5J4HDWNVQzZdZ46iVazHOYLMaGOw6DTaowMUQZfREc"
+        "versionLogicalId": "CreateNoteLambdaVersion8nrIvumSuVWvdvxct9YT6ULXry3zVOmKTngvg0ihA8"
       },
       "getNotes": {
         "handler": "functions/getNotes.handler",
@@ -1851,7 +1851,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetNotesLambdaVersionKi48H1UAOfg7vhVUB1WWBq8lFxsult4d0A7KEkCokIs"
+        "versionLogicalId": "GetNotesLambdaVersion1SDtXlRcUQrgMvl7q5tu0AV3985os2b5s3pFVx8dOF0"
       },
       "updateNote": {
         "handler": "functions/updateNote.handler",
@@ -1887,7 +1887,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "UpdateNoteLambdaVersion59lNJohbF7n2eE1Wc9zH8dQ0PwQySlWqb13ilX65ds"
+        "versionLogicalId": "UpdateNoteLambdaVersiongRM3mKkMFuaZ6xaT4wN1tDpggxgJaOUO6kl3IHHUVk"
       },
       "deleteNote": {
         "handler": "functions/deleteNote.handler",
@@ -1923,7 +1923,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "DeleteNoteLambdaVersiongDKMXUN1doVnA7ZJra28afYx5YiGyEOVnV4sjCrkkw"
+        "versionLogicalId": "DeleteNoteLambdaVersionOGlG1AqOqZW6Ifxy5Ux5dkTX7a9jVi8zxr3F1KhpQs"
       },
       "summarizeNote": {
         "handler": "functions/summarizeNote.handler",
@@ -1959,7 +1959,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "SummarizeNoteLambdaVersionIV2iymjrF1E0abiDuDCBfc90dlYJwf0DLSglXaIUYQ"
+        "versionLogicalId": "SummarizeNoteLambdaVersionV8s1xM5dPSXd4wlPC0aBprjBnrFtX7zxfCogOoLddo"
       },
       "sharedNotes": {
         "handler": "functions/getNotes.handler",
@@ -1995,7 +1995,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "SharedNotesLambdaVersionuWuTGAaHy0TGpw6z3lXkHCvvklGVL9hFAGBa7F6i5Lw"
+        "versionLogicalId": "SharedNotesLambdaVersionB9P7Rf23qo1DbENmz9z8eIqHrhV1NBlmajvlXKw6Es"
       },
       "pinnedNotes": {
         "handler": "functions/getNotes.handler",
@@ -2031,7 +2031,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "PinnedNotesLambdaVersiongX0rh8C2QpbX1MsaYE6eyp0N22wLiz7rzjuiXQRYFfg"
+        "versionLogicalId": "PinnedNotesLambdaVersionFjBSEgQXslyoxGfmzYSF0EZVmOUbZBdTNWzYiBNsEY"
       },
       "archivedNotes": {
         "handler": "functions/getNotes.handler",
@@ -2067,7 +2067,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ArchivedNotesLambdaVersionhKrAOU1QQymheTDVCmirBWmwz13qtxgMM3f71GxBkU"
+        "versionLogicalId": "ArchivedNotesLambdaVersionfGqMURg0new6dBJUjnIWFcdM8JTtCKQCXjLzlmRTnYc"
       }
     },
     "configValidationMode": "warn",
@@ -2089,7 +2089,7 @@
     "artifact": "C:\\Users\\gadoc\\OneDrive\\Desktop\\web_dev\\WEBPROJECTS\\ai-adhd-notetaker\\backend\\.serverless\\adhd-notes-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/adhd-notes-api/dev/1744049413667-2025-04-07T18:10:13.667Z",
+    "artifactDirectoryName": "serverless/adhd-notes-api/dev/1744066093838-2025-04-07T22:48:13.838Z",
     "artifact": "adhd-notes-api.zip"
   }
 }

@@ -1,12 +1,17 @@
-
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { 
-  Note, 
-  CreateNoteDto, 
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  ReactNode,
+} from "react";
+import {
+  Note,
+  CreateNoteDto,
   UpdateNoteDto,
-  notesService 
-} from '../services/notesService';
-import { toast } from 'sonner';
+  notesService,
+} from "../services/notesService";
+import { toast } from "sonner";
 
 interface NotesContextType {
   notes: Note[];
@@ -31,7 +36,9 @@ interface NotesContextType {
 
 const NotesContext = createContext<NotesContextType | undefined>(undefined);
 
-export const NotesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const NotesProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [pinnedNotes, setPinnedNotes] = useState<Note[]>([]);
   const [archivedNotes, setArchivedNotes] = useState<Note[]>([]);
@@ -41,75 +48,63 @@ export const NotesProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [error, setError] = useState<string | null>(null);
 
   // Fetch all notes
-  const fetchNotes = async () => {
-    setLoading(true);
+  const fetchNotes = useCallback(async () => {
     try {
       const fetchedNotes = await notesService.getAllNotes();
       setNotes(fetchedNotes);
       setError(null);
     } catch (error) {
-      setError('Failed to fetch notes');
+      setError("Failed to fetch notes");
       console.error(error);
-    } finally {
-      setLoading(false);
     }
-  };
+  }, []);
 
   // Fetch pinned notes
-  const fetchPinnedNotes = async () => {
-    setLoading(true);
+  const fetchPinnedNotes = useCallback(async () => {
     try {
       const fetchedNotes = await notesService.getPinnedNotes();
       setPinnedNotes(fetchedNotes);
       setError(null);
     } catch (error) {
-      setError('Failed to fetch pinned notes');
+      setError("Failed to fetch pinned notes");
       console.error(error);
-    } finally {
-      setLoading(false);
     }
-  };
+  }, []);
 
   // Fetch archived notes
-  const fetchArchivedNotes = async () => {
-    setLoading(true);
+  const fetchArchivedNotes = useCallback(async () => {
     try {
       const fetchedNotes = await notesService.getArchivedNotes();
       setArchivedNotes(fetchedNotes);
       setError(null);
     } catch (error) {
-      setError('Failed to fetch archived notes');
+      setError("Failed to fetch archived notes");
       console.error(error);
-    } finally {
-      setLoading(false);
     }
-  };
+  }, []);
 
   // Fetch shared notes
-  const fetchSharedNotes = async () => {
-    setLoading(true);
+  const fetchSharedNotes = useCallback(async () => {
     try {
       const fetchedNotes = await notesService.getSharedNotes();
       setSharedNotes(fetchedNotes);
       setError(null);
     } catch (error) {
-      setError('Failed to fetch shared notes');
+      setError("Failed to fetch shared notes");
       console.error(error);
-    } finally {
-      setLoading(false);
     }
-  };
+  }, []);
 
   // Create a new note
   const createNote = async (noteData: CreateNoteDto) => {
     setLoading(true);
     try {
       const newNote = await notesService.createNote(noteData);
-      setNotes(prevNotes => [...prevNotes, newNote]);
-      toast.success('Note created successfully');
+      setNotes((prevNotes) => [...prevNotes, newNote]);
+      toast.success("Note created successfully");
       return newNote;
     } catch (error) {
-      const errorMessage = 'Failed to create note';
+      const errorMessage = "Failed to create note";
       setError(errorMessage);
       toast.error(errorMessage);
       throw error;
@@ -123,57 +118,54 @@ export const NotesProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     setLoading(true);
     try {
       const updatedNote = await notesService.updateNote(id, noteData);
-      
+
       // Update the note in the appropriate lists
-      setNotes(prevNotes => 
-        prevNotes.map(note => note.id === id ? updatedNote : note)
+      setNotes((prevNotes) =>
+        prevNotes.map((note) => (note.id === id ? updatedNote : note)),
       );
-      
+
       if (updatedNote.isPinned) {
-        setPinnedNotes(prev => {
+        setPinnedNotes((prev) => {
           // Remove the note if it exists
-          const filtered = prev.filter(note => note.id !== id);
+          const filtered = prev.filter((note) => note.id !== id);
           // Add the updated note
           return [...filtered, updatedNote];
         });
       } else {
         // Remove from pinned if unpinned
-        setPinnedNotes(prev => prev.filter(note => note.id !== id));
+        setPinnedNotes((prev) => prev.filter((note) => note.id !== id));
       }
-      
+
       if (updatedNote.isArchived) {
-        setArchivedNotes(prev => {
-          // Remove the note if it exists
-          const filtered = prev.filter(note => note.id !== id);
+        setArchivedNotes((prev) => {
+          const filtered = prev.filter((note) => note.id !== id);
           // Add the updated note
           return [...filtered, updatedNote];
         });
       } else {
         // Remove from archived if unarchived
-        setArchivedNotes(prev => prev.filter(note => note.id !== id));
+        setArchivedNotes((prev) => prev.filter((note) => note.id !== id));
       }
-      
+
       if (updatedNote.isShared) {
-        setSharedNotes(prev => {
+        setSharedNotes((prev) => {
           // Remove the note if it exists
-          const filtered = prev.filter(note => note.id !== id);
+          const filtered = prev.filter((note) => note.id !== id);
           // Add the updated note
           return [...filtered, updatedNote];
         });
       } else {
-        // Remove from shared if unshared
-        setSharedNotes(prev => prev.filter(note => note.id !== id));
+        setSharedNotes((prev) => prev.filter((note) => note.id !== id));
       }
-      
-      // If the selected note is the one being updated, update it
+
       if (selectedNote && selectedNote.id === id) {
         setSelectedNote(updatedNote);
       }
-      
-      toast.success('Note updated successfully');
+
+      toast.success("Note updated successfully");
       return updatedNote;
     } catch (error) {
-      const errorMessage = 'Failed to update note';
+      const errorMessage = "Failed to update note";
       setError(errorMessage);
       toast.error(errorMessage);
       throw error;
@@ -187,21 +179,23 @@ export const NotesProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     setLoading(true);
     try {
       await notesService.deleteNote(id);
-      
+
       // Remove the note from all lists
-      setNotes(prevNotes => prevNotes.filter(note => note.id !== id));
-      setPinnedNotes(prevNotes => prevNotes.filter(note => note.id !== id));
-      setArchivedNotes(prevNotes => prevNotes.filter(note => note.id !== id));
-      setSharedNotes(prevNotes => prevNotes.filter(note => note.id !== id));
-      
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+      setPinnedNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+      setArchivedNotes((prevNotes) =>
+        prevNotes.filter((note) => note.id !== id),
+      );
+      setSharedNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+
       // If the selected note is the one being deleted, clear it
       if (selectedNote && selectedNote.id === id) {
         setSelectedNote(null);
       }
-      
-      toast.success('Note deleted successfully');
+
+      toast.success("Note deleted successfully");
     } catch (error) {
-      const errorMessage = 'Failed to delete note';
+      const errorMessage = "Failed to delete note";
       setError(errorMessage);
       toast.error(errorMessage);
       throw error;
@@ -217,7 +211,7 @@ export const NotesProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       const summary = await notesService.summarizeNote(content);
       return summary;
     } catch (error) {
-      const errorMessage = 'Failed to summarize note';
+      const errorMessage = "Failed to summarize note";
       setError(errorMessage);
       toast.error(errorMessage);
       throw error;
@@ -236,20 +230,17 @@ export const NotesProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const allTags = notes.reduce((tags: string[], note) => {
       return [...tags, ...(note.tags || [])];
     }, []);
-    
+
     // Return unique tags
     return [...new Set(allTags)];
   };
 
   // Filter notes by tag
   const getFilteredNotes = (tag: string) => {
-    return notes.filter(note => note.tags && note.tags.includes(tag));
+    return notes.filter((note) => note.tags && note.tags.includes(tag));
   };
 
-  // Initialize data when the component mounts
-  useEffect(() => {
-    fetchNotes();
-  }, []);
+  // Data loading is now handled by Notes.tsx to avoid double loading
 
   return (
     <NotesContext.Provider
@@ -272,8 +263,7 @@ export const NotesProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         selectNote,
         getAllTags,
         getFilteredNotes,
-      }}
-    >
+      }}>
       {children}
     </NotesContext.Provider>
   );
@@ -283,7 +273,7 @@ export const NotesProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 export const useNotes = () => {
   const context = useContext(NotesContext);
   if (context === undefined) {
-    throw new Error('useNotes must be used within a NotesProvider');
+    throw new Error("useNotes must be used within a NotesProvider");
   }
   return context;
 };

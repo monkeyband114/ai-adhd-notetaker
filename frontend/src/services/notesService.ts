@@ -4,14 +4,20 @@ import { toast } from "sonner";
 // Types for our data model
 export interface Note {
   id: string;
+  noteId?: string; // API response field
   title: string;
   content: string;
   isPinned: boolean;
   isArchived: boolean;
   isShared: boolean;
+  pinned?: boolean; // API response field
+  archived?: boolean; // API response field
+  sharedWith?: string[]; // API response field
   tags: string[];
   createdAt: string;
   updatedAt: string;
+  userId?: string; // API response field
+  summary?: string; // API response field
 }
 
 export interface CreateNoteDto {
@@ -30,9 +36,9 @@ export interface UpdateNoteDto {
 }
 
 // Base URL for our API endpoints
-const API_BASE_URL = "https://ymgd0a029g.execute-api.us-east-1.amazonaws.com/dev";
+const API_BASE_URL = "https://snddgzkuuj.execute-api.eu-north-1.amazonaws.com/dev";
 
-// Helper function for handling API requests
+// Helper function for handling API errors
 const handleApiError = (error: Error) => {
   console.error("API Error:", error);
   toast.error("An error occurred while connecting to the server");
@@ -46,10 +52,30 @@ export const notesService = {
     try {
       const response = await fetch(`${API_BASE_URL}/notes`);
       if (!response.ok) throw new Error(`Error: ${response.status}`);
-      return await response.json();
+      const notes = await response.json();
+      return notes.map(this.normalizeNote);
     } catch (error) {
       return handleApiError(error as Error);
     }
+  },
+
+  // Normalize API response to match our interface
+  normalizeNote(apiNote: any): Note {
+    return {
+      id: apiNote.noteId || apiNote.id,
+      title: apiNote.title,
+      content: apiNote.content,
+      isPinned: apiNote.pinned || apiNote.isPinned || false,
+      isArchived: apiNote.archived || apiNote.isArchived || false,
+      isShared: apiNote.sharedWith ? apiNote.sharedWith.length > 0 : (apiNote.isShared || false),
+      tags: apiNote.tags || [],
+      createdAt: apiNote.createdAt,
+      updatedAt: apiNote.updatedAt,
+      noteId: apiNote.noteId,
+      userId: apiNote.userId,
+      summary: apiNote.summary,
+      sharedWith: apiNote.sharedWith
+    };
   },
 
   // Get pinned notes
@@ -57,7 +83,8 @@ export const notesService = {
     try {
       const response = await fetch(`${API_BASE_URL}/notes/pinned`);
       if (!response.ok) throw new Error(`Error: ${response.status}`);
-      return await response.json();
+      const notes = await response.json();
+      return notes.map(this.normalizeNote);
     } catch (error) {
       return handleApiError(error as Error);
     }
@@ -68,7 +95,8 @@ export const notesService = {
     try {
       const response = await fetch(`${API_BASE_URL}/notes/archived`);
       if (!response.ok) throw new Error(`Error: ${response.status}`);
-      return await response.json();
+      const notes = await response.json();
+      return notes.map(this.normalizeNote);
     } catch (error) {
       return handleApiError(error as Error);
     }
@@ -79,7 +107,8 @@ export const notesService = {
     try {
       const response = await fetch(`${API_BASE_URL}/notes/shared`);
       if (!response.ok) throw new Error(`Error: ${response.status}`);
-      return await response.json();
+      const notes = await response.json();
+      return notes.map(this.normalizeNote);
     } catch (error) {
       return handleApiError(error as Error);
     }
@@ -90,7 +119,8 @@ export const notesService = {
     try {
       const response = await fetch(`${API_BASE_URL}/notes/${id}`);
       if (!response.ok) throw new Error(`Error: ${response.status}`);
-      return await response.json();
+      const note = await response.json();
+      return this.normalizeNote(note);
     } catch (error) {
       return handleApiError(error as Error);
     }
@@ -107,7 +137,8 @@ export const notesService = {
         body: JSON.stringify(noteData)
       });
       if (!response.ok) throw new Error(`Error: ${response.status}`);
-      return await response.json();
+      const note = await response.json();
+      return this.normalizeNote(note);
     } catch (error) {
       return handleApiError(error as Error);
     }
@@ -116,7 +147,9 @@ export const notesService = {
   // Update an existing note
   async updateNote(id: string, noteData: UpdateNoteDto): Promise<Note> {
     try {
-      const response = await fetch(`${API_BASE_URL}/notes/${id}`, {
+      // Use noteId if available, fallback to id
+      const noteId = id.includes('-') ? id : id;
+      const response = await fetch(`${API_BASE_URL}/notes/${noteId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -124,7 +157,8 @@ export const notesService = {
         body: JSON.stringify(noteData)
       });
       if (!response.ok) throw new Error(`Error: ${response.status}`);
-      return await response.json();
+      const note = await response.json();
+      return this.normalizeNote(note);
     } catch (error) {
       return handleApiError(error as Error);
     }

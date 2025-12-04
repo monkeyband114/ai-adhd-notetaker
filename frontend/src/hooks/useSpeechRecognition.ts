@@ -15,29 +15,34 @@ const useSpeechRecognition = (): SpeechRecognitionHook => {
   const [text, setText] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [recognition, setRecognition] = useState<SpeechRecognition | null>(null);
+  const [recognition, setRecognition] = useState<any>(null);
   const [browserSupportsSpeechRecognition, setBrowserSupportsSpeechRecognition] = useState(false);
 
   useEffect(() => {
     // Check if browser supports the Web Speech API
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-      const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+      // Use the types defined in our declaration file
+      const SpeechRecognitionAPI = 
+        ('SpeechRecognition' in window) 
+          ? (window as any).SpeechRecognition
+          : (window as any).webkitSpeechRecognition;
+      
       const recognitionInstance = new SpeechRecognitionAPI();
       
       recognitionInstance.continuous = true;
       recognitionInstance.interimResults = true;
       recognitionInstance.lang = 'en-US';
       
-      recognitionInstance.onresult = (event) => {
+      recognitionInstance.onresult = (event: any) => {
         const transcript = Array.from(event.results)
-          .map(result => result[0])
+          .map(result => (result as any)[0])
           .map(result => result.transcript)
           .join('');
         
         setText(transcript);
       };
       
-      recognitionInstance.onerror = (event) => {
+      recognitionInstance.onerror = (event: any) => {
         setError(event.error);
         setIsListening(false);
       };
